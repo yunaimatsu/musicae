@@ -2,7 +2,7 @@
 
 trap "echo 'Suspended!!'; exit 0" SIGINT
 
-JSON_FILE="$1.json"
+JSON_FILE="$HOME/musicae/playlists/$1.json"
 
 if [ ! -f "$JSON_FILE" ]; then
   echo "JSON file '$JSON_FILE' not found."
