@@ -1,7 +1,4 @@
 #!/bin/bash
-
-trap "echo 'Suspended!!'; exit 0" SIGINT
-
 JSON_FILE="$HOME/musicae/playlists/$1.json"
 
 if [ ! -f "$JSON_FILE" ]; then
