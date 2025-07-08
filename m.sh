@@ -15,6 +15,6 @@ while true; do
       --ytdl-format=bestaudio \
       --no-video \
       --term-playing-msg="🎵 Playing: $title" \
-      "https://www.youtube.com/watch?v=$id"
+      "https://youtube.com/watch?v=$id"
   done
 done
