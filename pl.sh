@@ -7,9 +7,8 @@ fi
 
 touch "$HOME/musicae/playlists/$2.json"
 yt-dlp \
-  -f bestaudio \
   --flat-playlist \
   --dump-json \
-  "https://youtube.com/@$1/videos" \
+  "$1" \
   | jq -s 'map({(.title): .id}) | add' \
 > "$HOME/musicae/playlists/$2.json"
