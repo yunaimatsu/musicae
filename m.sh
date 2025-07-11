@@ -1,4 +1,5 @@
 #!/bin/bash
+
 JSON_FILE="$HOME/musicae/playlists/$1.json"
 
 if [ ! -f "$JSON_FILE" ]; then
@@ -6,15 +7,11 @@ if [ ! -f "$JSON_FILE" ]; then
   exit 1
 fi
 
-while true; do
-  jq -r 'to_entries | map("\(.key)|\(.value)")[]' "$JSON_FILE" | \
-  shuf | \
-  while IFS='|' read -r title id; do
-    echo "Now playing: $title"
-    mpv \
-      --ytdl-format=bestaudio \
-      --no-video \
-      --term-playing-msg="🎵 Playing: $title" \
-      "https://youtube.com/watch?v=$id"
-  done
-done
+jq -r 'to_entries | map("https://youtube.com/watch?v=\(.value)")[]' "$JSON_FILE" | shuf > .tmp_playlist.txt
+
+mpv \
+  --no-video \
+  --terminal \
+  --msg-level=ffmpeg=fatal \
+  --term-playing-msg="🎵 Playing: \${media-title}" \
+  --playlist=.tmp_playlist.txt
